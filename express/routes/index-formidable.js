@@ -1,22 +1,15 @@
-var formidable = require('formidable')
-  , http = require('http')
-  , util = require('util')
+var express = require('express')
   , fs = require('fs')
+  , formidable = require('formidable')
+  , router = express.Router()
   ;
 
-http.createServer(function(req, res){
-  if(!((req.url === "/upload") && (req.method === "POST"))){
-    home(res);
-  }else{
-    upload(req, res);
-  }
-}).listen(3000);
+/* GET home page. */
+router.get('/', function (req, res) {
+  res.render('index', { title: 'Express' });
+});
 
-function home(res){
-    res.end("<html><body><form action='/upload' method='post' enctype='multipart/form-data'><input name='image' type='file'/><input type='submit'></form></body></html>");
-}
-
-function upload(req, res){
+router.post('/upload', function (req, res) {
   var form = new formidable.IncomingForm();
 
   form.parse(req, function(err, fields, files) {
@@ -24,7 +17,7 @@ function upload(req, res){
     res.write('received upload:\n\n');
     var image = files.image
       , image_upload_path_old = image.path
-      , image_upload_path_new = './upload/'
+      , image_upload_path_new = './public/images/'
       , image_upload_name = image.name
       , image_upload_path_name = image_upload_path_new + image_upload_name
       ;
@@ -59,8 +52,7 @@ function upload(req, res){
         });
       });
     }
-    // console.log(util.inspect({fields: fields, files: files}));
-    // res.end(util.inspect({fields: fields, files: files}));
   });
+});
 
-}
+module.exports = router;
