@@ -4,7 +4,8 @@
   "description": "Tutorial de como fazer upload de imagem com Node.js",
   "main": "upload-http.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "node preinstall.js"
   },
   "repository": {
     "type": "git",

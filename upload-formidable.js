@@ -1,6 +1,5 @@
 var formidable = require('formidable')
   , http = require('http')
-  , util = require('util')
   , fs = require('fs')
   ;
 
@@ -59,8 +58,5 @@ function upload(req, res){
         });
       });
     }
-    // console.log(util.inspect({fields: fields, files: files}));
-    // res.end(util.inspect({fields: fields, files: files}));
   });
-
 }
